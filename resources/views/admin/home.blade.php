@@ -30,7 +30,7 @@
 
 <div class="row box-section">
 <div class="col-sm-6 media-list media-list-linked">
-<a class="media-link" href="/dashboard/options">
+<a class="media-link" href="{{ route('options-index') }}">
 <div class="media-left"><img src="/skins/images/tools.png" class="img-lg section_icon"></div>
 <div class="media-body">
     <h6 class="media-heading  text-semibold">Настройка системы</h6>
@@ -82,7 +82,7 @@ $.ajaxSetup({
 
 $('#clearbutton').click(function() {
 
-    $.get("/dashboard/home/clearcache", function( data ){
+    $.get("/admin/clearcache", function( data ){
 
         $('#cachesize').html('0 b');
         Growl.info({
@@ -144,7 +144,7 @@ $('#check_updates').click(function() {
                 </tr>
                 <tr>
                     <td>Общий размер кэша:</td>
-                    <td><span id="cachesize">0.0 Kb</span></td>
+                    <td><span id="cachesize">{{ $cacheSize }}</span></td>
                 </tr>
             </table>
 

@@ -1,15 +1,15 @@
 @extends('layouts.account')
 
 @section('css')
-<link rel="stylesheet" type="text/css" media="all" href="//bneteu-a.akamaihd.net/account/static/css/management/lobby.3s2q1.css" />
-<!--[if IE]> <link rel="stylesheet" type="text/css" media="all" href="//bneteu-a.akamaihd.net/account/static/css/management/lobby-ie.3i6Ai.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/static/css/management/lobby.24rnt.css') }}" />
+<!--[if IE]> <link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/static/css/management/lobby-ie.2vTEB.css') }}" />
 <![endif]-->
-<!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="//bneteu-a.akamaihd.net/account/static/css/management/lobby-ie6.1kFY8.css" />
+<!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/static/css/management/lobby-ie6.2nZ0A.css') }}" />
 <![endif]-->
 @endsection
 
 @section('js')
-<script type="text/javascript" src="//bneteu-a.akamaihd.net/account/static/js/management/lobby.1hRaj.js"></script>
+<script type="text/javascript" src="{{ asset_media('/account/static/js/management/lobby.2ePKQ.js') }}"></script>
 @endsection
 
 @section('content')
@@ -32,15 +32,9 @@ Blizzard Mobile Authenticator — бесплатный способ защити
 <h3 class="section-title">Информация о записи</h3>
 <div class="lobby-box">
 <h4 class="subcategory">Название учетной записи</h4>
-<p class="account-name">{{ $profileUser->email }}
-<span class="edit">[<a href="{{ route('change-email') }}">Редактировать</a>]</span>
-</p>
-<h4 class="subcategory help-link-right" data-tooltip="Это имя, под которым вас будут знать на " data-tooltip-options='{"location": "mouse"}'>Имя</h4>
-@if($profileUser->name)
+<p class="account-name">{{ $profileUser->email }}<span class="edit">[<a href="{{ route('change-email') }}">Редактировать</a>]</span></p>
+<h4 class="subcategory help-link-right" data-tooltip="Это имя, под которым вас будут знать на {{ config('app.name') }}" data-tooltip-options='{"location": "mouse"}'>Имя</h4>
 <p>{{ $profileUser->name }} <span class="edit">[<a href="{{ route('tag-name-change') }}" id="battletag-purchase">Платная смена имени</a>]</span></p>
-@else
-<p>{{ $profileUser->name }} <span class="edit"><a href="{{ route('create-name') }}">Создать</a></span></p>
-@endif
 </div>
 <h3 class="section-title">Защита записи</h3>
 <div class="lobby-box security-box">
@@ -79,7 +73,7 @@ Blizzard Mobile Authenticator — бесплатный способ защити
 </ul>
 </div>
 <div id="games-tools">
-<a href="{{ route('claim-code') }}" id="add-game" class="border-5">Прикрепить ключ игры</a>
+<a href="{{ route('invite') }}" id="add-game" class="border-5">Пригласить друзей</a>
 <p>
 <a href="{{ route('get-a-game') }}" class="" onclick="">
 <span class="icon-16 icon-account-buy"></span>
@@ -195,7 +189,7 @@ var GameRegions = {
 };
 //]]>
 </script>
-<!--[if IE 6]> <script type="text/javascript" src="//bneteu-a.akamaihd.net/account/static/local-common/js/third-party/DD_belatedPNG.4JzIy.js"></script>
+<!--[if IE 6]> <script type="text/javascript" src="{{ asset_media('/account/static/local-common/js/third-party/DD_belatedPNG.4JzIy.js') }}"></script>
 <script type="text/javascript">
 //<![CDATA[
 DD_belatedPNG.fix('.icon-16');

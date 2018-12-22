@@ -1,31 +1,41 @@
 @extends('layouts.account')
 
 @section('css')
-<link rel="stylesheet" type="text/css" media="all" href="//bneteu-a.akamaihd.net/account/static/css/management/add-game.3obun.css" />
-<!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="//bneteu-a.akamaihd.net/account/static/css/management/add-game-ie7.2qMph.css" /><![endif]-->
-
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/static/css/management/add-game.1y5GJ.css') }}" />
+<!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/static/css/management/add-game-ie7.3qZni.css') }}" /><![endif]-->
 @endsection
 
 @section('js')
-<script type="text/javascript" src="//bneteu-a.akamaihd.net/account/static/js/management/add-game.0t7VS.js"></script>
+<script type="text/javascript" src="{{ asset_media('/account/static/js/management/add-game.4G4gU.js') }}"></script>
 @endsection
 
 @section('content')
 <div id="layout-middle">
 			<div class="wrapper">
 				<div id="content">@if (session('error'))
-				    <div class="alert error border-4 glow-shadow     closeable         " style="             ">
+				    <div class="alert error border-4 glow-shadow closeable">
 			<div class="alert-inner">
 				<div class="alert-message">
 						<p class="title"><strong>Произошла ошибка.</strong></p>
 
-						<p class="error.addGame.gameKey.invalid">Этот код не подходит. Проверьте, правилен ли он, и введите его заново. Если вы все равно видите это сообщение, то попробуйте, пожалуйста, попозже еще раз: вероятно, на сайте сейчас проводится техническое обслуживание.</p>
+						<p class="error.addGame.gameKey.invalid">{{ session('error') }}</p>
 				</div>
 			</div>
 				<a class="alert-close" href="#" onclick="$(this).parent().fadeOut(250, function() { $(this).css({opacity:0}).animate({height: 0}, 100, function() { $(this).remove(); }); }); return false;">Закрыть</a>
 	<span class="clear"><!-- --></span>
 		</div> @endif
+         @if (session('success'))
+				    <div class="alert success border-4 glow-shadow closeable">
+			<div class="alert-inner">
+				<div class="alert-message">
+						<p class="title"><strong>Код успешно использован</strong></p>
 
+						<p class="success.addGame.gameKey.invalid">{{ session('success') }}</p>
+				</div>
+			</div>
+				<a class="alert-close" href="#" onclick="$(this).parent().fadeOut(250, function() { $(this).css({opacity:0}).animate({height: 0}, 100, function() { $(this).remove(); }); }); return false;">Закрыть</a>
+	<span class="clear"><!-- --></span>
+		</div> @endif
 	<div class="add-game">
 		<div id="page-header">
 			<h2 class="subcategory">Управление игрой</h2>

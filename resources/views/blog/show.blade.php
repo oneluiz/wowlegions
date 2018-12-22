@@ -1,25 +1,22 @@
 @extends('layouts.app')
 
-@section('css')
-<link rel="stylesheet" href="https://worldofwarcraft.akamaized.net/static/styles/blog.css?v=4.23.0">
-<link type="text/css" rel="stylesheet" href="//eu.battle.net/forums/static/css/comments.css"/>
-@endsection
-
 @section('js')
-<script src="{{ asset('static/scripts/blog.js') }}"></script>
-<script type="text/javascript" src="//eu.battle.net/forums/static/js/vendor/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="//eu.battle.net/forums/static/js/comment-cookie.js"></script>
-<script type="text/javascript" src="//eu.battle.net/forums/static/js/vendor/tether/dist/js/tether.min.js"></script>
+<script src="{{ asset_media('/static/scripts/blog.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/forums/static/js/vendor/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/forums/static/js/comment-cookie.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/forums/static/js/vendor/tether/dist/js/tether.min.js') }}"></script>
 <script type="text/javascript">$(function() {
 	Comments.initialize('{{ $blog->id }}', '{{ $blog->id }}', '/', 'wow');
 });
 </script>
 @endsection
+
 @section('blogjs')
 <script>var dataLayer = dataLayer || [];
-dataLayer.push({"blog":{"author":"TheRock","id":{{ $blog->id }},"publishDate":"{{ $blog->created_at->format('Y-M-d') }}","title":"{{ $blog->title }}"}});
+dataLayer.push({"blog":{"author":"{{ $blog->user->name }}","id":{{ $blog->id }},"publishDate":"{{ $blog->created_at->format('Y-M-d') }}","title":"{{ $blog->title }}"}});
 </script>
 @endsection
+
 @section('content')
 <div class="Pane Pane--underSiteNav Pane--fadeBottom bordered" data-url="{{ asset('uploads/images/'.$blog->images) }}">
     <div class="Pane-bg" style="background-color:#000000;background-image:url(&quot;{{ asset('uploads/images/'.$blog->images) }}&quot;);">
@@ -39,7 +36,7 @@ dataLayer.push({"blog":{"author":"TheRock","id":{{ $blog->id }},"publishDate":"{
         <div class="List">
             <div class="font-bliz-light-small-beige" media-medium="List-item gutter-tiny">
                 <div class="Content">
-                    <a href="/search/blog?a=TheRock">TheRock</a>, {{ $blog->created_at->format('d M Y') }}
+                    <a href="/search/blog?a={{ $blog->user->name }}">{{ $blog->user->name }}</a>, {{ $blog->created_at->format('d M Y') }}
                 </div>
             </div>
         <div class="List-item gutter-tiny">
@@ -48,7 +45,7 @@ dataLayer.push({"blog":{"author":"TheRock","id":{{ $blog->id }},"publishDate":"{
                     <span class="Icon Icon--comment Icon--small CommentTotal-icon">
                         <svg class="Icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64"><use xlink:href="/static/components/Icon/Icon.svg#comment"></use></svg>
                     </span>
-                    <div class="CommentTotal-number">{{ App\Comment::where('post_id', $blog->id)->count() }}</div>
+                    <div class="CommentTotal-number">{{ App\Comment::where('blog_id', $blog->id)->count() }}</div>
                 </div>
             </a>
         </div>
@@ -70,8 +67,7 @@ dataLayer.push({"blog":{"author":"TheRock","id":{{ $blog->id }},"publishDate":"{
 <div class="space-medium"></div>
 <div id="blog">
 <div class="Blog">
-    <article class="detail">{!! $blog->full_blog !!}
-</article>
+    <article class="detail">{!! $blog->full_blog !!}</article>
 </div>
 </div>
 <div class="space-medium"></div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Characters extends Model {
 
@@ -10,9 +11,7 @@ class Characters extends Model {
 
     protected $fillable = ['guid', 'name', 'gender', 'class', 'race', 'level'];
 
-    public function comments() {
-        return $this->belongsTo(Comment::class);
-    }
+    public $timestamps = false;
 
     public static function verifyEligibility($character, $service) {
         $Eligible = false;
@@ -62,7 +61,7 @@ class Characters extends Model {
     }
 
     private static function checkCharacterInbox($character) {
-        $result = \DB::connection('characters')->select('SELECT m.*, c.name FROM mail m, characters c WHERE m.receiver = c.guid AND c.name = ?', [$character]);
+        $result = DB::connection('characters')->select('SELECT m.*, c.name FROM mail m, characters c WHERE m.receiver = c.guid AND c.name = ?', [$character]);
         if(empty($result))
             return false;
         else
@@ -70,31 +69,35 @@ class Characters extends Model {
     }
 
     private static function checkIfCharacterOnline($character) {
-        $result = \DB::connection('characters')->select('SELECT online FROM characters WHERE name = ?', [$character]);
+        $result = DB::connection('characters')->select('SELECT online FROM characters WHERE name = ?', [$character]);
         if($result[0]->online == 0)
             return false;
         else
             return true;
     }
 
+    public static function userCharactersList($id) {
+        return DB::connection('characters')->table('characters')->where('account', '=', $id)->get();
+    }
+
     public static function userGameCharacters($id) {
-        return \DB::connection('characters')->table('characters')->where('account', '=', $id)->get();
+        return DB::connection('characters')->table('characters')->where('account', '=', $id)->get();
     }
 
     public static function userCharacters($name) {
-        $characters = \DB::connection('characters')->table('characters')->where('name', '=', $name)->get()[0];
+        $characters = DB::connection('characters')->table('characters')->where('name', '=', $name)->get()[0];
         $characters->side = self::getSideByRaceID($characters->race)['name'];
         return $characters;
     }
 
     public static function activeUserCharacters($id) {
-        $characters = \DB::connection('characters')->table('characters')->where('guid', '=', $id)->get()[0];
+        $characters = DB::connection('characters')->table('characters')->where('guid', '=', $id)->get()[0];
         $characters->side = self::getSideByRaceID($characters->race)['name'];
         return $characters;
     }
 
     public static function ifCharacters($id) {
-        $characters = \DB::connection('characters')->table('characters')->where('guid', '=', $id)->get();
+        $characters = DB::connection('characters')->table('characters')->where('guid', '=', $id)->get();
         if ($characters) {
             return true;
         } return false;

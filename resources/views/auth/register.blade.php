@@ -3,21 +3,21 @@
 <head xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
 <meta name="viewport" content="width=device-width" />
 <title>Учетная запись Blizzard</title>
-<link rel="shortcut icon" href="/account/creation/static/images/meta/favicon.0gxnz.ico" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/toolkit/blizzard-web.min.0RPhe.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/global.min.01ob2.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/navbar.min.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/account-creation/creation.min.0tdnu.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/social/social.min.11gO8.css?v=58-1" />
-<script type="text/javascript" src="/account/creation/static/js/toolkit/third-party/jquery/jquery-1.11.0.1aJ0K.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/toolkit/toolkit.min.3Crdu.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/local-common/js/common.16hIS.js?v=58"></script>
+<link rel="shortcut icon" href="{{ asset_media('/account/creation/static/images/meta/favicon.0gxnz.ico') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/toolkit/blizzard-web.min.0RPhe.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/global.min.01ob2.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/navbar.min.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/account-creation/creation.min.0tdnu.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/social/social.min.11gO8.css') }}" />
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/toolkit/third-party/jquery/jquery-1.11.0.1aJ0K.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/toolkit/toolkit.min.3Crdu.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/local-common/js/common.16hIS.js') }}"></script>
 <script type="text/javascript">
 //<![CDATA[
 var Core = Core || {},
 Login = Login || {};
-Core.staticUrl = '/account/creation/static';
-Core.sharedStaticUrl = '/account/creation/static/local-common';
+Core.staticUrl = '{{ asset_media("/account/creation/static") }}';
+Core.sharedStaticUrl = '{{ asset_media("/account/creation/static/local-common") }}';
 Core.baseUrl = '/account/creation/ru';
 Core.projectUrl = '/account/creation';
 Core.cdnUrl = 'http://media.blizzard.com';
@@ -34,6 +34,41 @@ Core.userAgent = 'web';
 Login.embeddedUrl = '/{{ app()->getLocale() }}/login';
 //]]>
 </script>
+<style type="text/css">
+<!--
+label.uploadbutton {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    height: 30px;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+label.uploadbutton input {
+    display: none;
+}
+
+label.uploadbutton .button {
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    background: #7300df;
+    transition: background 0.2s;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #fff;
+    display: inline-block;
+}
+label.uploadbutton:hover .button {
+    background: green;
+}
+
+label.uploadbutton .input {
+    width: 300px;
+    display: inline-block;
+}
+-->
+</style>
 </head>
 <body class="eu {{ app()->getLocale() }} wow-template web creation" data-embedded-state="STATE_ACCOUNT_CREATION" data-analytics-view="/creation/account-creation">
 <script>
@@ -78,6 +113,9 @@ document.body.className += " js-enabled";
 <form action="{{ route('register') }}" id="account-creation" method="post" name="account-creation" novalidate="novalidate">
 {{ csrf_field() }}
 <fieldset>
+<div class="control-group row-name {{ $errors->has('name') ? 'control-error text-error' : '' }}">
+<input type="text" id="name" name="name" value="" placeholder="Логин" maxlength="320" autocapitalize="off" autocomplete="off" autocorrect="off" class="grid-100" spellcheck="false" required="true" /> <span id="name-error-inline" class="help-block"></span>
+</div>
 <div class="control-group row-emailAddress {{ $errors->has('email') ? 'control-error text-error' : '' }}">
 <input type="email" id="emailAddress" name="email" value="" placeholder="E-mail" maxlength="320" autocapitalize="off" autocomplete="off" autocorrect="off" class="grid-100" spellcheck="false" required="true" /> <span id="emailAddress-error-inline" class="help-block"></span>
 </div>
@@ -123,7 +161,7 @@ document.body.className += " js-enabled";
 <div class="grid-100 row-checkbox">
 <label class="checkbox-label">
 <input id="agreedToPrivacyPolicy" name="agreedToPrivacyPolicy" type="checkbox"/>
-Я принимаю условия <a href="http://eu.blizzard.com/ru-ru/company/about/privacy.html" rel="external" target="_blank">политики конфиденциальности<i class="icon-external-link"></i></a>.<br><em>Подробнее о том, как мы собираем пользовательские данные и как вы можете от этого отказаться, — в нашей Политике конфиденциальности.</em>
+Я принимаю условия <a href="/" rel="external" target="_blank">политики конфиденциальности<i class="icon-external-link"></i></a>.<br><em>Подробнее о том, как мы собираем пользовательские данные и как вы можете от этого отказаться, — в нашей Политике конфиденциальности.</em>
 </label>
 </div>
 </div>
@@ -418,12 +456,12 @@ formInteracted = true;
 <polygon points="116.66 60.93 114.88 60.93 114.88 64.94 113.65 64.94 113.65 60.93 111.88 60.93 111.88 60.03 116.66 60.03 116.66 60.93"/>
 </g></svg></div>
 @include('layouts.footer')
-<script type="text/javascript" src="/account/creation/static/js/account-creation/account-creation.min.3mp4I.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/account-creation/zxcvbn.min.0S2nW.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/account-creation/password-requirements.min.31Z5L.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/toolkit/toolkit-select.4ECdw.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/ab-testing-optimizely/event-api.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/navbar.min.js?v=58-1"></script>
-<script src="/account/creation/static/js/embedded-javascript/embed-0.1.5.min.js?v=58-1"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/account-creation/account-creation.min.3mp4I.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/account-creation/zxcvbn.min.0S2nW.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/account-creation/password-requirements.min.31Z5L.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/toolkit/toolkit-select.4ECdw.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/ab-testing-optimizely/event-api.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/navbar.min.js') }}"></script>
+<script src="{{ asset_media('/account/creation/static/js/embedded-javascript/embed-0.1.5.min.js') }}"></script>
 </body>
 </html>

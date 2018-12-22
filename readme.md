@@ -3,9 +3,22 @@
 ## Site installation
 
 <ul>
-<li>To upload files to the server</li>
-<li>To configure the database connection in the file - .env</li>
-<li>To load the database dump of the site</li>
+<li>To upload files to the server
+<li>To load the database dump of the site
+<li>Open your website in a browser and follow the instructions
+</ul>
+
+## Server Requirements
+<ul>
+<li>PHP >= 7.1.3
+<li>MySQL >= 5.7.23
+<li>OpenSSL PHP Extension
+<li>PDO PHP Extension
+<li>Mbstring PHP Extension
+<li>Tokenizer PHP Extension
+<li>XML PHP Extension
+<li>Ctype PHP Extension
+<li>JSON PHP Extension
 </ul>
 
 ## Server version
@@ -19,7 +32,7 @@
 ## Information
 
 <ul>
-<li><a href="http://wowlegions.ru/ru" rel="nofollow">Demo site here</a>.</li>
+<li><a href="http://wowlegions.ru/" rel="nofollow">Demo site here</a>.</li>
 <li><a href="https://github.com/anonymous33rus/wowlegions/issues" rel="nofollow">Bugtracker</a>.</li>
 </ul>
 

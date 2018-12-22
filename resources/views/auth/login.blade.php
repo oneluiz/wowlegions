@@ -2,16 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-ru" class="ru-ru eu">
 <head xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
 <meta name="viewport" content="width=device-width" />
-<title>Авторизация учетной записи -  World of Warcraft</title>
-<link rel="shortcut icon" href="/account/creation/static/images/meta/favicon.0gxnz.ico" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/toolkit/blizzard-web.min.0RPhe.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/global.min.01ob2.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/navbar.min.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/account-creation/creation.min.0tdnu.css?v=58-1" />
-<link rel="stylesheet" type="text/css" media="all" href="/account/creation/static/css/social/social.min.11gO8.css?v=58-1" />
-<script type="text/javascript" src="/account/creation/static/js/toolkit/third-party/jquery/jquery-1.11.0.1aJ0K.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/toolkit/toolkit.min.3Crdu.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/local-common/js/common.16hIS.js?v=58"></script>
+<title>@lang('login.title')</title>
+<link rel="shortcut icon" href="{{ asset_media('/account/creation/static/images/meta/favicon.0gxnz.ico') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/toolkit/blizzard-web.min.0RPhe.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/global.min.01ob2.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/navbar.min.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/account-creation/creation.min.0tdnu.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset_media('/account/creation/static/css/social/social.min.11gO8.css') }}" />
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/toolkit/third-party/jquery/jquery-1.11.0.1aJ0K.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/toolkit/toolkit.min.3Crdu.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/local-common/js/common.16hIS.js') }}"></script>
 <script type="text/javascript">
 //<![CDATA[
 var Core = Core || {},
@@ -68,11 +68,11 @@ document.body.className += " js-enabled";
 <div id="content">
 <div class="body-content grid">
 <div class="grid-100">
-<h1 class="logo">Авторизация учетной записи</h1>
+<h1 class="logo">@lang('login.logo')</h1>
 </div>
 <div class="content-container creation-container grid-parent">
 <div class="" id="information-container">
-<h1>Авторизация учетной записи</h1>
+<h1>@lang('login.logo')</h1>
 </div>
 <div class="grid-parent" id="form-container">
 <form action="{{ route('login') }}" id="account-creation" method="post" name="account-creation" novalidate="novalidate">
@@ -82,7 +82,7 @@ document.body.className += " js-enabled";
 <input type="email" id="emailAddress" name="email" value="" placeholder="E-mail" maxlength="320" autocapitalize="off" autocomplete="off" autocorrect="off" class="grid-100" spellcheck="false" required="true" /> <span id="emailAddress-error-inline" class="help-block"></span>
 </div>
 <div class="control-group row-password {{ $errors->has('password') ? 'control-error text-error' : '' }}">
-<input type="password" id="password" name="password" value="" maxlength="16" placeholder="Пароль" class="password-input showGuidelines" data-email_field="#emailAddress" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" required="true" /> <div class="password-rating"></div>
+<input type="password" id="password" name="password" value="" maxlength="16" placeholder="@lang('login.password')" class="password-input showGuidelines" data-email_field="#emailAddress" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" required="true" /> <div class="password-rating"></div>
 <span id="password-error-inline" class="help-block"></span>
 </div>
 </fieldset>
@@ -93,15 +93,15 @@ document.body.className += " js-enabled";
 </fieldset>
 <div class="form-controls">
 <button class="btn btn-block btn-primary" id="creation-submit-button" type="submit">
-<span class="button-text">Авторизация</span>
+<span class="button-text">@lang('login.submit')</span>
 <i class="spinner-battlenet"></i>
 </button>
 <a class="btn btn-block" id="creation-cancel-button" href="{{ route('register') }}">
-<span class="button-text">Нет учетной записи ?</span>
+<span class="button-text">@lang('login.register')</span>
 <i class="spinner-battlenet"></i>
 </a>
 <a class="btn btn-block" id="creation-cancel-button" href="{{ route('password.request') }}">
-<span class="button-text">Забыли пароль ?</span>
+<span class="button-text">@lang('login.password-request')</span>
 <i class="spinner-battlenet"></i>
 </a>
 </div>
@@ -240,11 +240,11 @@ document.body.className += " js-enabled";
 <polygon points="116.66 60.93 114.88 60.93 114.88 64.94 113.65 64.94 113.65 60.93 111.88 60.93 111.88 60.03 116.66 60.03 116.66 60.93"/>
 </g></svg></div>
 @include('layouts.footer')
-<script type="text/javascript" src="/account/creation/static/js/account-creation/account-creation.min.3mp4I.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/account-creation/zxcvbn.min.0S2nW.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/toolkit/toolkit-select.4ECdw.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/ab-testing-optimizely/event-api.js?v=58-1"></script>
-<script type="text/javascript" src="/account/creation/static/js/navbar.min.js?v=58-1"></script>
-<script src="/account/creation/static/js/embedded-javascript/embed-0.1.5.min.js?v=58-1"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/account-creation/account-creation.min.3mp4I.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/account-creation/zxcvbn.min.0S2nW.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/toolkit/toolkit-select.4ECdw.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/ab-testing-optimizely/event-api.js') }}"></script>
+<script type="text/javascript" src="{{ asset_media('/account/creation/static/js/navbar.min.js') }}"></script>
+<script src="{{ asset_media('/account/creation/static/js/embedded-javascript/embed-0.1.5.min.js') }}"></script>
 </body>
 </html>
